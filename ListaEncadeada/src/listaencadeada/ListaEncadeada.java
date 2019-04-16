@@ -40,11 +40,13 @@ public class ListaEncadeada<T> {
         if (posicao >= tamanho()) { //Verificação de posição.
             System.out.println("Posição Inválida.");
         } else { //Se não...
-            No noFrente = recuperarNo(posicao + 1);
-            No noAtual = recuperarNo(posicao);          //Recupera No Atual.
-            No novoNo = new No(elemento);               //Cria novo No.              
+            No noFrente = recuperarNo(posicao + 1);     //Recupera 1 Nó a frente do Nó atual
+            No noAtual = recuperarNo(posicao);          //Recupera Nó Atual.
+            
+            No novoNo = new No(elemento);               //Cria novo No.
+            
             noAtual.setProximo(novoNo);                 //Seta o novoNo como proximo do Atual.
-            novoNo.setProximo(noFrente);                //Seta o noFrente como proximo do novoN
+            novoNo.setProximo(noFrente);                //Seta o noFrente como proximo do novoNo
         }
         tamanho++;
     }
@@ -77,22 +79,23 @@ public class ListaEncadeada<T> {
     public void inserirOrdenado(int elemento) {
         No auxNo = new No(elemento);
 
-        if (vazio()) {
+        if (vazio()) { //Se vazio, inserir elemento como primeiro.
             this.inserirPrimeiro(elemento);
-        } else {
-            if (elemento < this.primeiroNo.getElemento()) {
+        } else { //Se não...
+            if (elemento < this.primeiroNo.getElemento()) { //Se o elemento for menor que o primeiro elemento, insere em primeiro.
                 this.inserirPrimeiro(elemento);
-            } else {
-                No novoNo = primeiroNo;
-                No proximoNo = null;
-
-                while (novoNo != null && novoNo.getElemento() < auxNo.getElemento()) {
-                    proximoNo = novoNo;
-                    novoNo = novoNo.getProximo();
+            } else { //Senão...
+                No proximoNo = primeiroNo;
+                No anteriorNo = null;
+                
+                //[1,2,4,5] (3)
+                while (proximoNo != null && proximoNo.getElemento() < auxNo.getElemento()) {  //Enquando o elemento do próximoNo for menor que o elemento que queremos inserir 
+                    anteriorNo = proximoNo;             //No anterior recebe o proximoNo        
+                    proximoNo = proximoNo.getProximo(); //ProximoNo recebe seu próximo.
                 }
-                proximoNo.setProximo(novoNo);
+                anteriorNo.setProximo(proximoNo); //Seta o proximoNo como próximo do anterior.
 
-                this.inserirDepois(proximoNo, elemento);
+                this.inserirDepois(anteriorNo, elemento); //Insere o elemento depois do No anterior.
             }
         }
 
@@ -111,8 +114,8 @@ public class ListaEncadeada<T> {
         No noAnterior = null;
 
         while (novoNo.getProximo() != null) { //Enquando o proximo do novoNo for diferente de null...
-            noAnterior = novoNo;            //Atribui o novoNo ao noAnterior
-            novoNo = novoNo.getProximo();   //Atualiza o novoNo para o seu próximo.
+            noAnterior = novoNo;              //Atribui o novoNo ao noAnterior
+            novoNo = novoNo.getProximo();     //Atualiza o novoNo para o seu próximo.
         }
         tamanho--;
         noAnterior.setProximo(null);
@@ -124,11 +127,11 @@ public class ListaEncadeada<T> {
     public int recuperar(int posicao) {
         No noAtual = primeiroNo; //Variável para guaradar posição do No.
         int count = 0;
-        while (noAtual != null) { //Se for diferente de null...
-            if (count == posicao) {
-                return noAtual.getElemento();
+        while (noAtual != null) { //Enquando o noAtual for diferente de null...
+            if (count == posicao) { //Se count for igual a posição...
+                return noAtual.getElemento(); //retorna o elemento do noArual, se não...
             }
-            count++;
+            count++; //count acrescenta 1.
             noAtual = noAtual.getProximo();
 
         }

@@ -11,7 +11,7 @@ public class No {
         this.proximo = null;
     }
     
-    //Construtor com elemento e No.
+    //Construtor com elemento e proximoNo.
     public No(int elemento, No proximo){
         this.elemento = elemento;
         this.proximo = proximo;

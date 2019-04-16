@@ -2,11 +2,11 @@ package listaencadeada;
 
 public class Interseccao {
 
-    public static boolean pertence(No p, int info) {
-        No novoNo = p;
+    public static boolean pertence(No x, int elemento) {
+        No novoNo = x;
 
         while (novoNo != null) {
-            if (novoNo.getElemento() == info) {
+            if (novoNo.getElemento() == elemento) {
                 return true;
             }
 
@@ -17,38 +17,40 @@ public class Interseccao {
     }
 
     public static ListaEncadeada<Integer> interseccao(ListaEncadeada<Integer> listaA, ListaEncadeada<Integer> listaB) {
-        No aux = listaA.primeiroNo;
-        No novo = null;
+        No noAtual = listaA.primeiroNo;
+        //No novoNo = null;
 
         ListaEncadeada<Integer> listaC = new ListaEncadeada<>();
 
-        while (aux != null) {
-            if (pertence(listaB.primeiroNo, aux.getElemento())) {
-                listaC.inserirOrdenado(aux.getElemento());
+        while (noAtual != null) {
+            if (pertence(listaB.primeiroNo, noAtual.getElemento())) {
+                listaC.inserirOrdenado(noAtual.getElemento());
             }
 
-            aux = aux.getProximo();
+            noAtual = noAtual.getProximo();
         }
 
         return listaC;
     }
 
     public static void main(String[] args) {
-        ListaEncadeada<Integer> listaA = new ListaEncadeada<Integer>();
+        ListaEncadeada<Integer> listaA = new ListaEncadeada<>();
 
-        listaA.inserirPrimeiro(3);
-        listaA.inserirPrimeiro(24);
-        listaA.inserirUltimo(4);
-        listaA.inserirPrimeiro(13);
+        listaA.inserir(3);
+        listaA.inserir(24);
+        listaA.inserir(4);
+        listaA.inserir(13);
+        listaA.inserir(5);
 
-        ListaEncadeada<Integer> listaB = new ListaEncadeada<Integer>();
+        ListaEncadeada<Integer> listaB = new ListaEncadeada<>();
 
-        listaB.inserirPrimeiro(24);
-        listaB.inserirPrimeiro(4);
-        listaB.inserirUltimo(9);
-        listaB.inserirPrimeiro(-1);
+        listaB.inserir(24);
+        listaB.inserir(5);
+        listaB.inserir(4);
+        listaB.inserir(9);
+        listaB.inserir(-1);
 
-        ListaEncadeada<Integer> listaC = new ListaEncadeada<Integer>();
+        ListaEncadeada<Integer> listaC = new ListaEncadeada<>();
 
         listaC = interseccao(listaA, listaB);
 

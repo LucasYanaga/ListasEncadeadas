@@ -10,7 +10,7 @@ public class Main {
         listaA.inserir(5);                  //[4, 5]
         listaA.inserirOrdenado(2);          //[2, 4, 5]
         listaA.inserirOrdenado(1);          //[1, 2, 4, 5]
-        listaA.inserirOrdenado(3);          //[1, 2, 3, 4, 5]
+        listaA.inserirOrdenado(3);          //[1, 2, 4, 5]
         listaA.inserirPrimeiro(6);          //[6, 1, 2, 3, 4, 5]
         listaA.inserirUltimo(7);            //[6, 1, 2, 3, 4, 5, 7]
         listaA.inserirDepoisPosicao(2, 8);  //[6, 1, 2, 8, 3, 4, 5, 7]
